@@ -33,7 +33,25 @@ This repository contains the setup instructions for deploying a MERN stack blog 
    - Name: `yourname-blogapp-media`
    - Uncheck: Block all public access
 
-2. Add CORS Configuration:
+2. Add Bucket Policy:
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicGetPutPost",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": "arn:aws:s3:::yourname-blogapp-media/*"
+        }
+    ]
+}
+```
+3. Add CORS Configuration:
 ```json
 [
   {
@@ -43,6 +61,10 @@ This repository contains the setup instructions for deploying a MERN stack blog 
     "ExposeHeaders": ["ETag"]
   }
 ]
+```
+4. Test Upoload
+```bash
+curl -v -X PUT -T image.jpg http://yourname-blogapp-media.s3.amazonaws.com/image.jpg
 ```
 
 ## IAM User Setup
@@ -62,6 +84,8 @@ This repository contains the setup instructions for deploying a MERN stack blog 
       "Resource": [
         "arn:aws:s3:::yourname-blogapp-media",
         "arn:aws:s3:::yourname-blogapp-media/*"
+        "arn:aws:s3:::yourname-blogapp-frontend",
+        "arn:aws:s3:::yourname-blogapp-frontend/*"
       ]
     }
   ]
