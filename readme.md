@@ -83,7 +83,7 @@ curl -v -X PUT -T image.jpg http://yourname-blogapp-media.s3.amazonaws.com/image
       "Action": ["s3:PutObject", "s3:GetObject", "s3:DeleteObject", "s3:ListBucket"],
       "Resource": [
         "arn:aws:s3:::yourname-blogapp-media",
-        "arn:aws:s3:::yourname-blogapp-media/*"
+        "arn:aws:s3:::yourname-blogapp-media/*",
         "arn:aws:s3:::yourname-blogapp-frontend",
         "arn:aws:s3:::yourname-blogapp-frontend/*"
       ]
